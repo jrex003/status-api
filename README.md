@@ -31,10 +31,14 @@ Type in the desired endpoint after the base URL
 http://127.0.0.1:8000/{endpoint}
 ```
 
-If parameters are needed, type them after the endpoint in the format `?param1=value1&param2=value2`
+If parameters are needed, type them after the endpoint in the following format:
+
+`?param1=value1&param2=value2`
 ```
 http://127.0.0.1:8000/{endpoint}?param1=value1&param2=value2
 ```
+
+If no parameters are provided, the default values will be used.
 
 ### GET /uptime
 This endpoint returns the uptime of your system.
@@ -77,11 +81,10 @@ The status is defined as follows:
 
 ### GET /top_processes
 This endpoint returns the top N processes sorted by either CPU or memory usage.
+
 Parameters:
 - limit: Number of processes to return (default: 10, max: 100)
 - sort_by: Sorting criteria ("cpu" or "memory", default: "cpu")
-
-If no parameters are provided, the default values will be used.
 ```json
 {
   "data": {
