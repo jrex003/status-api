@@ -132,7 +132,7 @@ If no parameters are provided, the default values will be used.
   },
   "metadata": {
     "total_processes": 368,
-    "returned_processes": 10,
+    "returned_processes": 7,
     "sorted_by": "memory",
     "timestamp": "2025-03-18T18:01:48.573262+00:00"
   }
