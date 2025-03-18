@@ -1,11 +1,11 @@
 # Status API
 
-Access information on the status and health of your system. Data will be returned in JSON format.
+Access information on the status and health of your system. The API returns data in JSON format.
 
 ## Installation
 1. Clone the repository
 ```bash
-git https://github.com/jrex003/status-api.git
+git clone https://github.com/jrex003/status-api.git
 ```
 2. Navigate to the project directory after cloning
 ```bash
@@ -31,29 +31,7 @@ Type in the desired endpoint after the base URL
 http://localhost:8000/{endpoint}
 ```
 
-If parameters are needed, type them after the endpoint in the following format:
-
-`?param1=value1&param2=value2`
-```
-http://localhost:8000/{endpoint}?param1=value1&param2=value2
-```
-
-If no parameters are provided, the default values will be used.
-
-### GET /
-This is the root endpoint that serves as a directory for available endpoints.
-```json
-{
-  "available_endpoints": {
-    "GET /": "Directory",
-    "GET /status": "System status and metrics",
-    "GET /uptime": "System uptime information",
-    "GET /top_processes": "Sorted list of top processes"
-  }
-}
-```
-
-### GET /uptime
+### /uptime
 This endpoint returns the uptime of your system.
 ```json
 {
@@ -68,12 +46,12 @@ This endpoint returns the uptime of your system.
 }
 ```
 
-### GET /status
+### /status
 This endpoint returns the status and metrics of your system.
 The status is defined as follows:
-- healthy: if cpu_usage < 70%, memory_usage < 75%, and disk_usage < 80%
-- degraded: if cpu_usage > 70%, memory_usage > 75%, and disk_usage > 80%
-- unhealthy: if cpu_usage > 90%, memory_usage > 90%, and disk_usage > 95%
+- healthy: if cpu_usage < 70%, memory_usage < 75%, or disk_usage < 80%
+- degraded: if cpu_usage > 70%, memory_usage > 75%, or disk_usage > 80%
+- unhealthy: if cpu_usage > 90%, memory_usage > 90%, or disk_usage > 95%
 ```json
 {
   "status": "healthy",
@@ -92,12 +70,26 @@ The status is defined as follows:
 }
 ```
 
-### GET /top_processes
+### /top-processes
 This endpoint returns the top N processes sorted by either CPU or memory usage.
+
+Add parameters after the endpoint in the following format:
+
+`?param1=value1&param2=value2`
+```
+http://localhost:8000/{endpoint}?param1=value1&param2=value2
+```
+
+If parameters are omitted, the API applies default values.
 
 Parameters:
 - limit: Number of processes to return (default: 10, max: 100)
 - sort_by: Sorting criteria ("cpu" or "memory", default: "cpu")
+
+Example:
+```
+http://localhost:8000/top-processes?limit=7&sort_by=memory
+```
 ```json
 {
   "data": {
@@ -143,7 +135,7 @@ Parameters:
         "pid": 2148,
         "name": "MsMpEng.exe",
         "cpu_percent": 0
-      },
+      }
     ]
   },
   "metadata": {

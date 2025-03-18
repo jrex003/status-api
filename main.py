@@ -4,16 +4,14 @@ import datetime
 import time
 
 app = FastAPI()
+BASE_URL = "http://localhost:8000"
 
 @app.get("/")
 def root():
     return {
-        "available_endpoints": {
-            "GET /": "Directory",
-            "GET /status": "System status and metrics",
-            "GET /uptime": "System uptime information",
-            "GET /top_processes": "Sorted list of top processes"
-        },
+        "status": f"{BASE_URL}/status",
+        "uptime": f"{BASE_URL}/uptime",
+        "top_processes": f"{BASE_URL}/top-processes"
     }
 
 @app.get("/uptime")
@@ -83,7 +81,7 @@ def get_status():
         "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()
     }
 
-@app.get("/top_processes")
+@app.get("/top-processes")
 def get_top_processes(limit: int = 10, sort_by: str = "cpu", max_limit: int = 100):
     """
     Returns the top N processes sorted by either CPU or memory usage.
