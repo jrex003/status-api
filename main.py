@@ -5,6 +5,17 @@ import time
 
 app = FastAPI()
 
+@app.get("/")
+def root():
+    return {
+        "available_endpoints": {
+            "GET /": "Directory",
+            "GET /status": "System status and metrics",
+            "GET /uptime": "System uptime information",
+            "GET /top_processes": "Sorted list of top processes"
+        },
+    }
+
 @app.get("/uptime")
 def get_uptime():
     uptime = datetime.datetime.now() - datetime.datetime.fromtimestamp(psutil.boot_time())

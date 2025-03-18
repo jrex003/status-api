@@ -21,24 +21,37 @@ pip install -r requirements.txt
 ```
 ## How to use the API
 
-Start the server by typing the following command in the terminal. You will then be able to access the API at `http://127.0.0.1:8000`
+Start the server by typing the following command in the terminal. You will then be able to access the API at `http://localhost:8000` in your browser.
 ```
 uvicorn main:app --reload
 ```
 ## Endpoints
 Type in the desired endpoint after the base URL
 ```
-http://127.0.0.1:8000/{endpoint}
+http://localhost:8000/{endpoint}
 ```
 
 If parameters are needed, type them after the endpoint in the following format:
 
 `?param1=value1&param2=value2`
 ```
-http://127.0.0.1:8000/{endpoint}?param1=value1&param2=value2
+http://localhost:8000/{endpoint}?param1=value1&param2=value2
 ```
 
 If no parameters are provided, the default values will be used.
+
+### GET /
+This is the root endpoint that serves as a directory for available endpoints.
+```json
+{
+  "available_endpoints": {
+    "GET /": "Directory",
+    "GET /status": "System status and metrics",
+    "GET /uptime": "System uptime information",
+    "GET /top_processes": "Sorted list of top processes"
+  }
+}
+```
 
 ### GET /uptime
 This endpoint returns the uptime of your system.
