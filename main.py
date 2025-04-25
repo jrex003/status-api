@@ -9,6 +9,7 @@ BASE_URL = "http://localhost:8000"
 @app.get("/")
 def root():
     return {
+        "ci-cd test": "If you see this, the test is successful",
         "status": f"{BASE_URL}/status",
         "uptime": f"{BASE_URL}/uptime",
         "top_processes": f"{BASE_URL}/top-processes"
