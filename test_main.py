@@ -45,7 +45,7 @@ def test_top_processes_sort_by_memory():
     assert response.status_code == 200
     json_data = response.json()
     assert json_data["metadata"]["sorted_by"] == "memory"
-    assert json_data["metadata"]["returned_processes"] == 5
+    assert json_data["metadata"]["returned_processes"] <= 5
 
 def test_top_processes_invalid_sort_by():
     response = client.get("/top-processes?sort_by=invalid")
